@@ -35,7 +35,6 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .main-tab{background:none;border:none;border-bottom:2.5px solid transparent;padding:10px 20px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;margin-bottom:-1.5px;}
 .main-tab.active{color:var(--text);border-bottom-color:var(--accent);}
 .tab-panel{display:none;}.tab-panel.active{display:block;}
-
 .panel{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px 18px;margin-bottom:14px;}
 .panel-title{font-size:12px;font-weight:500;color:var(--muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em;}
 
@@ -59,7 +58,6 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .bar-wrap{width:80px;height:5px;background:var(--bg);border-radius:3px;overflow:hidden;display:inline-block;vertical-align:middle;}
 .bar-fill{height:100%;background:var(--accent);border-radius:3px;}
 
-/* ORG TABS */
 .org-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap;}
 .org-tab{background:none;border:none;border-bottom:2px solid transparent;padding:7px 14px;font-size:13px;color:var(--muted);cursor:pointer;margin-bottom:-1px;white-space:nowrap;}
 .org-tab.active{color:var(--text);border-bottom-color:var(--accent);}
@@ -67,50 +65,44 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 
 .section-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
 .section-label:first-child{margin-top:0;}
+.models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:8px;}
 
 /* MODEL CARDS */
-.models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:8px;}
-.model-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:grab;user-select:none;transition:box-shadow .15s,border-color .15s;position:relative;}
-.model-card:active{cursor:grabbing;}
-.model-card.dragging{opacity:.35;box-shadow:0 6px 20px rgba(0,0,0,0.15);}
+.model-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);overflow:visible;user-select:none;transition:box-shadow .15s,border-color .15s;position:relative;}
 .model-card.in-tienda{border-color:rgba(37,99,235,0.35);}
 .model-card.has-alert{border-color:rgba(220,38,38,0.4);}
-
-.card-img{width:100%;height:130px;object-fit:contain;background:var(--bg);padding:10px;}
-.card-img-placeholder{width:100%;height:130px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:36px;}
-
-.card-body{padding:10px 10px 8px;}
-.card-name{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin-bottom:8px;line-height:1.3;}
-
-/* TALLAS TABLE */
+.model-card.dragging{opacity:.35;box-shadow:0 6px 20px rgba(0,0,0,0.15);}
+.card-drag-handle{width:100%;cursor:grab;display:block;}
+.card-drag-handle:active{cursor:grabbing;}
+.card-img{width:100%;height:130px;object-fit:contain;background:var(--bg);padding:10px;display:block;border-radius:var(--radius) var(--radius) 0 0;}
+.card-img-placeholder{width:100%;height:130px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:var(--radius) var(--radius) 0 0;}
+.card-body{padding:10px 10px 6px;}
+.card-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin-bottom:8px;line-height:1.3;}
 .card-sizes{width:100%;border-collapse:collapse;}
 .card-sizes td{font-size:11px;padding:2px 0;line-height:1.4;}
-.card-sizes .td-size{color:var(--muted);width:40px;}
-.card-sizes .td-stock{font-weight:500;text-align:right;}
-.td-stock.alert-critico{color:#dc2626;}
-.td-stock.alert-bajo{color:#d97706;}
-.td-stock.alert-ok{color:var(--text);}
-.td-stock.alert-sin{color:#dc2626;font-weight:700;}
-
-.card-footer{padding:6px 10px 8px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);margin-top:6px;}
-.card-loc{font-size:10px;color:var(--muted);}
-.card-menu-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0 2px;line-height:1;}
+.td-size{color:var(--muted);width:38px;}
+.td-stock{font-weight:500;text-align:right;}
+.td-stock.s-sin{color:#dc2626;font-weight:700;}
+.td-stock.s-crit{color:#dc2626;}
+.td-stock.s-bajo{color:#d97706;}
+.td-stock.s-ok{color:var(--text);}
+.card-footer{padding:6px 8px 8px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);margin-top:6px;}
+.card-loc{font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100px;}
+.card-menu-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:0 2px;flex-shrink:0;}
 .card-menu-btn:hover{color:var(--text);}
 
-/* DROPDOWN */
-.card-dropdown{position:absolute;bottom:100%;right:8px;margin-bottom:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:0 4px 20px rgba(0,0,0,0.12);z-index:200;min-width:170px;display:none;overflow:hidden;}
+/* DROPDOWN — positioned relative to card */
+.card-dropdown{position:absolute;bottom:36px;right:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:0 4px 20px rgba(0,0,0,0.15);z-index:500;min-width:160px;display:none;overflow:hidden;}
 .card-dropdown.open{display:block;}
 .card-dropdown button{display:block;width:100%;text-align:left;padding:8px 14px;background:none;border:none;font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap;}
 .card-dropdown button:hover{background:var(--bg);}
-.card-dropdown button.active-loc{color:var(--accent);font-weight:500;}
+.card-dropdown button.dd-active{color:var(--accent);font-weight:500;}
 .dd-sep{height:1px;background:var(--border);margin:3px 0;}
 
-/* DROP ZONES */
 .drop-zone{min-height:60px;border:2px dashed var(--border);border-radius:var(--radius);padding:10px;transition:border-color .15s,background .15s;margin-bottom:12px;}
 .drop-zone.drag-over{border-color:var(--accent);background:var(--info-bg);}
 .drop-hint{font-size:12px;color:var(--muted);text-align:center;padding:12px 0;}
 
-/* REPO */
 .repo-table{width:100%;border-collapse:collapse;font-size:13px;}
 .repo-table th{font-size:11px;font-weight:500;color:var(--muted);text-align:left;padding:0 8px 8px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border);}
 .repo-table td{padding:8px;border-bottom:.5px solid var(--border);vertical-align:middle;}
@@ -124,7 +116,6 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 </head>
 <body>
 <div class="app">
-
 <header>
   <div class="header-left">
     <h1>SPORCKS · Dashboard</h1>
@@ -175,16 +166,16 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
     <button class="org-tab" onclick="switchOrg('Almacen',this)">Almacen</button>
   </div>
   <div id="org-modelos" class="org-panel active">
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Arrastra modelos a su ubicacion o usa ⋯ para reasignar. Al asignar, el producto se marca automaticamente como <em>en tienda</em>.</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Arrastra modelos a su ubicacion o usa ⋯ para reasignar. Al asignar ubicacion, el modelo se marca automaticamente como <em>en tienda</em>.</p>
     <div id="modelos-content"><div class="loading">Cargando…</div></div>
   </div>
-  <div id="org-Pared 1"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 1')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Pared 1"></div></div>
-  <div id="org-Pared 2"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 2')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Pared 2"></div></div>
-  <div id="org-Pared 3"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 3')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Pared 3"></div></div>
-  <div id="org-Pared 4"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 4')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Pared 4"></div></div>
-  <div id="org-Mostrador 1" class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 1')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Mostrador 1"></div></div>
-  <div id="org-Mostrador 2" class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 2')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Mostrador 2"></div></div>
-  <div id="org-Almacen"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Almacen')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-Almacen"></div></div>
+  <div id="org-Pared 1"     class="org-panel"><div class="drop-zone" id="dz-Pared 1"     ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 1')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Pared 1"></div></div>
+  <div id="org-Pared 2"     class="org-panel"><div class="drop-zone" id="dz-Pared 2"     ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 2')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Pared 2"></div></div>
+  <div id="org-Pared 3"     class="org-panel"><div class="drop-zone" id="dz-Pared 3"     ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 3')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Pared 3"></div></div>
+  <div id="org-Pared 4"     class="org-panel"><div class="drop-zone" id="dz-Pared 4"     ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 4')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Pared 4"></div></div>
+  <div id="org-Mostrador 1" class="org-panel"><div class="drop-zone" id="dz-Mostrador 1" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 1')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Mostrador 1"></div></div>
+  <div id="org-Mostrador 2" class="org-panel"><div class="drop-zone" id="dz-Mostrador 2" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 2')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Mostrador 2"></div></div>
+  <div id="org-Almacen"     class="org-panel"><div class="drop-zone" id="dz-Almacen"     ondragover="onDragOver(event)" ondrop="onDrop(event,'Almacen')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="grid-Almacen"></div></div>
 </div>
 
 <!-- REPOSICION -->
@@ -193,7 +184,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
       <div>
         <div class="panel-title" style="margin-bottom:4px;">Reposicion BigBlue</div>
-        <p style="font-size:12px;color:var(--muted)">Solo SKUs en tienda. Ajusta cantidades y descarga el CSV.</p>
+        <p style="font-size:12px;color:var(--muted)">Solo SKUs en tienda con cantidad a pedir > 0.</p>
       </div>
       <div style="display:flex;gap:8px;">
         <button class="btn btn-secondary" onclick="renderReposicion()">↻ Recalcular</button>
@@ -208,37 +199,24 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
     </div>
   </div>
 </div>
-
 </div>
+
 <script>
 const LS_KEY  = 'sporcks_script_url';
-const LS_UBIC = 'sporcks_ubicaciones_v4';
-const LS_ENT  = 'sporcks_en_tienda_v2';
-let SCRIPT_URL = localStorage.getItem(LS_KEY) || '';
+const LS_UBIC = 'sporcks_ubic_v5';
+const LS_ENT  = 'sporcks_ent_v3';
+let SCRIPT_URL  = localStorage.getItem(LS_KEY) || '';
+let stockMap    = {};
+let skuConfig   = [];
+let topData     = { historico:[], mes:[] };
+let activeTop   = 'historico';
+let ubicaciones = JSON.parse(localStorage.getItem(LS_UBIC) || '{}');
+let enTiendaLocal = JSON.parse(localStorage.getItem(LS_ENT) || '{}');
+let draggedModel  = null;
+let openDDId      = null;
 
-// Raw data from API
-let stockMap   = {};   // { 'SKU': stockActual }
-let skuConfig  = [];   // array of SKU config rows
-let topData    = { historico: [], mes: [] };
-let activeTop  = 'historico';
-
-// Local state
-let ubicaciones     = JSON.parse(localStorage.getItem(LS_UBIC) || '{}'); // producto -> ubicacion
-let enTiendaLocal   = JSON.parse(localStorage.getItem(LS_ENT)  || '{}'); // producto -> bool override
-let draggedModel    = null;
-
-const UBICACIONES = ['Pared 1','Pared 2','Pared 3','Pared 4','Mostrador 1','Mostrador 2','Almacen'];
+const UBICACIONES  = ['Pared 1','Pared 2','Pared 3','Pared 4','Mostrador 1','Mostrador 2','Almacen'];
 const TALLAS_ORDER = ['XS','S','M','L','XL','XXL'];
-const MINIMOS = {
-  'Hombre':              {XS:10,S:20,M:20,L:10,XL:10,XXL:0},
-  'Mujer':               {XS:20,S:20,M:20,L:10,XL:5, XXL:0},
-  'Exp. central hombre': {XS:10,S:10,M:20,L:10,XL:10,XXL:0},
-  'Exp. central mujer':  {XS:20,S:20,M:10,L:10,XL:5, XXL:0},
-  'Multi':               {XS:5, S:5, M:10,L:5, XL:5, XXL:0},
-  'Camisetas':           {XS:2, S:2, M:2, L:2, XL:2, XXL:2},
-  'Bidones':             {XS:10,S:10,M:10,L:10,XL:10,XXL:10},
-  'Otros':               {XS:3, S:3, M:3, L:3, XL:3, XXL:3},
-};
 
 // ── Setup ─────────────────────────────────────────────────
 function saveScriptUrl() {
@@ -260,9 +238,8 @@ async function apiFetch(action) {
   return r.json();
 }
 async function apiPost(body) {
-  try {
-    await fetch(SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
-  } catch(e) { console.warn('POST error:', e); }
+  try { await fetch(SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) }); }
+  catch(e) { console.warn('POST error:', e); }
 }
 
 // ── Load ──────────────────────────────────────────────────
@@ -271,12 +248,12 @@ async function loadAll() {
   const btn = document.getElementById('refresh-btn');
   btn.disabled = true; btn.textContent = '↻ Cargando…';
   try {
-    const [summary, top, stock, skucfg] = await Promise.all([
+    const [summary, top, stock, cfg] = await Promise.all([
       apiFetch('summary'), apiFetch('top'), apiFetch('stock'), apiFetch('skuconfig')
     ]);
-    stockMap  = stock || {};
-    skuConfig = skucfg || [];
-    topData   = top || { historico:[], mes:[] };
+    stockMap  = stock  || {};
+    skuConfig = cfg    || [];
+    topData   = top    || { historico:[], mes:[] };
     renderMetrics(summary);
     renderTop();
     renderOrganizacion();
@@ -311,7 +288,7 @@ function switchTop(tab, btn) {
 // ── Metrics ───────────────────────────────────────────────
 function renderMetrics(s) {
   document.getElementById('metrics').innerHTML = `
-    <div class="metric ${s.stock_sin_stock+s.stock_critico>0?'danger':''}">
+    <div class="metric ${(s.stock_sin_stock+s.stock_critico)>0?'danger':''}">
       <div class="metric-label">Sin stock / Critico</div>
       <div class="metric-value">${s.stock_sin_stock+s.stock_critico}</div>
       <div class="metric-sub">${s.stock_sin_stock} sin stock · ${s.stock_critico} criticos</div>
@@ -346,143 +323,150 @@ function renderTop() {
     </tr>`).join('') + '</tbody></table>';
 }
 
-// ── Model grouping ────────────────────────────────────────
+// ── Model helpers ─────────────────────────────────────────
 function buildModels() {
   const map = {};
   skuConfig.forEach(s => {
     const key = s.product_name || s.sku;
-    if (!map[key]) map[key] = { nombre: key, imagen: '', skus: [] };
+    if (!map[key]) map[key] = { nombre:key, imagen:'', skus:[] };
     if (s.imagen && !map[key].imagen) map[key].imagen = s.imagen;
     map[key].skus.push(s);
   });
   return Object.values(map).sort((a, b) => {
-    const aEnt = isEnTienda(a.nombre);
-    const bEnt = isEnTienda(b.nombre);
-    if (aEnt !== bEnt) return aEnt ? -1 : 1;
+    const aE = isEnTienda(a.nombre), bE = isEnTienda(b.nombre);
+    if (aE !== bE) return aE ? -1 : 1;
     return a.nombre.localeCompare(b.nombre, 'es');
   });
 }
 
 function isEnTienda(nombre) {
   if (enTiendaLocal[nombre] !== undefined) return enTiendaLocal[nombre];
-  const cfg = skuConfig.find(s => s.product_name === nombre);
-  return cfg ? cfg.en_tienda : false;
+  return skuConfig.filter(s => s.product_name === nombre).some(s => s.en_tienda);
 }
 function getUbic(nombre) { return ubicaciones[nombre] || null; }
 
-function getStockAlerta(sku, size, tipo) {
-  const stock = stockMap[sku] || 0;
-  const mins  = MINIMOS[tipo];
-  if (!mins) return { stock, cls: 'alert-ok' };
-  const noSize = ['Bidones','Otros'].includes(tipo);
-  const min   = noSize ? (mins['XS']||0) : (mins[String(size).toUpperCase()]||0);
-  let cls = 'alert-ok';
-  if (stock <= 0)           cls = 'alert-sin';
-  else if (stock <= min)    cls = 'alert-critico';
-  else if (stock <= min*1.5) cls = 'alert-bajo';
-  return { stock, cls };
+function stockClass(stock, min) {
+  if (stock <= 0)          return 's-sin';
+  if (stock <= min)        return 's-crit';
+  if (stock <= min * 1.5)  return 's-bajo';
+  return 's-ok';
 }
 
+// ── Card builder ──────────────────────────────────────────
+let cardCounter = 0;
 function makeCard(model) {
-  const ubic   = getUbic(model.nombre);
-  const enT    = isEnTienda(model.nombre);
-  const safeKey= encodeURIComponent(model.nombre);
-  const ddId   = 'dd-' + Math.random().toString(36).slice(2,10);
+  const ubic    = getUbic(model.nombre);
+  const enT     = isEnTienda(model.nombre);
+  const ddId    = 'dd' + (++cardCounter);
+  const safeKey = encodeURIComponent(model.nombre);
 
-  // Sort skus by talla order
-  const skusSorted = [...model.skus].sort((a, b) => {
-    return TALLAS_ORDER.indexOf(a.size.toUpperCase()) - TALLAS_ORDER.indexOf(b.size.toUpperCase());
-  });
+  // Sort skus by talla
+  const sorted = [...model.skus].sort((a,b) =>
+    TALLAS_ORDER.indexOf(a.size.toUpperCase()) - TALLAS_ORDER.indexOf(b.size.toUpperCase())
+  );
 
-  // Check if any has alert
   let hasAlert = false;
-  const sizesHtml = skusSorted.map(s => {
-    const { stock, cls } = getStockAlerta(s.sku, s.size, s.tipo_expositor);
-    if (cls !== 'alert-ok') hasAlert = true;
-    return `<tr>
-      <td class="td-size">${s.size||'—'}</td>
-      <td class="td-stock ${cls}">${stock}</td>
-    </tr>`;
+  const sizesHtml = sorted.map(s => {
+    const stock = stockMap[s.sku] !== undefined ? stockMap[s.sku] : '—';
+    const cls   = typeof stock === 'number' ? stockClass(stock, s.stock_minimo) : 's-ok';
+    if (cls !== 's-ok') hasAlert = true;
+    return `<tr><td class="td-size">${s.size||'—'}</td><td class="td-stock ${cls}">${stock}</td></tr>`;
   }).join('');
 
   const imgHtml = model.imagen
-    ? `<img class="card-img" src="${model.imagen}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><div class="card-img-placeholder" style="display:none">🧦</div>`
+    ? `<img class="card-img" src="${model.imagen}" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt=""><div class="card-img-placeholder" style="display:none">🧦</div>`
     : `<div class="card-img-placeholder">🧦</div>`;
 
   const menuItems = UBICACIONES.map(u =>
-    `<button class="${ubic===u?'active-loc':''}" onclick="assignModel('${safeKey}','${u}')">${ubic===u?'✓ ':''} ${u}</button>`
+    `<button class="${ubic===u?'dd-active':''}" onclick="assignModel('${safeKey}','${u}')">${ubic===u?'✓ ':''} ${u}</button>`
   ).join('') +
   '<div class="dd-sep"></div>' +
-  `<button onclick="assignModel('${safeKey}',null)" style="color:var(--muted)">Quitar ubicacion</button>`;
+  `<button onclick="assignModel('${safeKey}','')" style="color:var(--muted)">Quitar ubicacion</button>`;
 
-  return `<div class="model-card ${enT?'in-tienda':''} ${hasAlert?'has-alert':''}"
-    draggable="true"
-    ondragstart="onDragStart(event,'${safeKey}')"
-    ondragend="onDragEnd(event)">
-    ${imgHtml}
+  return `<div class="model-card ${enT?'in-tienda':''} ${hasAlert?'has-alert':''}" data-nombre="${safeKey}">
+    <div class="card-drag-handle"
+      draggable="true"
+      ondragstart="onDragStart(event,'${safeKey}')"
+      ondragend="onDragEnd(event)">
+      ${imgHtml}
+    </div>
     <div class="card-body">
       <div class="card-name">${model.nombre}</div>
       <table class="card-sizes">${sizesHtml}</table>
     </div>
     <div class="card-footer">
-      <span class="card-loc">${ubic ? '📍 '+ubic : ''}</span>
+      <span class="card-loc">${ubic?'📍 '+ubic:''}</span>
       <button class="card-menu-btn" onclick="toggleDD(event,'${ddId}')">⋯</button>
     </div>
     <div class="card-dropdown" id="${ddId}">${menuItems}</div>
   </div>`;
 }
 
-// ── Render organizacion ───────────────────────────────────
+// ── Render org ────────────────────────────────────────────
 function renderOrganizacion() {
+  cardCounter = 0;
   const models = buildModels();
   const enT    = models.filter(m => isEnTienda(m.nombre));
   const noEnT  = models.filter(m => !isEnTienda(m.nombre));
   let html = '';
-  if (enT.length)  html += `<div class="section-label">En tienda (${enT.length})</div><div class="models-grid">${enT.map(makeCard).join('')}</div>`;
+  if (enT.length)   html += `<div class="section-label">En tienda (${enT.length})</div><div class="models-grid">${enT.map(makeCard).join('')}</div>`;
   if (noEnT.length) html += `<div class="section-label">Sin configurar (${noEnT.length})</div><div class="models-grid">${noEnT.map(makeCard).join('')}</div>`;
   document.getElementById('modelos-content').innerHTML = html || '<div class="empty">Sin datos. Rellena Configuracion_SKU.</div>';
 
-  UBICACIONES.forEach(ubic => {
-    const el = document.getElementById('dz-' + ubic);
+  UBICACIONES.forEach(u => {
+    const el = document.getElementById('grid-' + u);
     if (!el) return;
-    el.innerHTML = models.filter(m => getUbic(m.nombre) === ubic).map(makeCard).join('') || '';
+    const items = models.filter(m => getUbic(m.nombre) === u);
+    el.innerHTML = items.map(makeCard).join('') || '';
   });
 }
 
-// ── Assign / drag ─────────────────────────────────────────
+// ── Assign & state ────────────────────────────────────────
 function setEnTienda(nombre, val) {
   enTiendaLocal[nombre] = val;
   localStorage.setItem(LS_ENT, JSON.stringify(enTiendaLocal));
-  // Actualizar Sheets para todos los SKUs del modelo
   skuConfig.filter(s => s.product_name === nombre).forEach(s => {
-    apiPost({ action:'setEnTienda', sku: s.sku, en_tienda: val });
+    apiPost({ action:'setEnTienda', sku:s.sku, en_tienda:val });
   });
 }
 function setUbic(nombre, ubic) {
   if (ubic) { ubicaciones[nombre] = ubic; setEnTienda(nombre, true); }
-  else       { delete ubicaciones[nombre]; setEnTienda(nombre, false); }
+  else      { delete ubicaciones[nombre]; setEnTienda(nombre, false); }
   localStorage.setItem(LS_UBIC, JSON.stringify(ubicaciones));
 }
 function assignModel(safeKey, ubic) {
-  setUbic(decodeURIComponent(safeKey), ubic || null);
+  const nombre = decodeURIComponent(safeKey);
+  setUbic(nombre, ubic || null);
   closeAllDD();
   renderOrganizacion();
 }
 
+// ── Drag & drop ───────────────────────────────────────────
 function onDragStart(e, safeKey) {
   draggedModel = decodeURIComponent(safeKey);
   e.dataTransfer.effectAllowed = 'move';
-  setTimeout(() => e.target.classList.add('dragging'), 0);
+  e.dataTransfer.setData('text/plain', draggedModel);
+  // Mark card as dragging
+  const card = e.currentTarget.closest('.model-card');
+  if (card) setTimeout(() => card.classList.add('dragging'), 0);
 }
 function onDragEnd(e) {
-  e.target.classList.remove('dragging');
+  const card = e.currentTarget.closest('.model-card');
+  if (card) card.classList.remove('dragging');
   document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+  draggedModel = null;
 }
-function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('drag-over');
+}
 function onDrop(e, ubic) {
-  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
-  if (!draggedModel) return;
-  setUbic(draggedModel, ubic);
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const nombre = draggedModel || e.dataTransfer.getData('text/plain');
+  if (!nombre) return;
+  setUbic(nombre, ubic);
   draggedModel = null;
   renderOrganizacion();
 }
@@ -490,35 +474,44 @@ function onDrop(e, ubic) {
 // ── Dropdown ──────────────────────────────────────────────
 function toggleDD(e, id) {
   e.stopPropagation();
-  const el = document.getElementById(id);
-  const was = el.classList.contains('open');
+  e.preventDefault();
+  const el   = document.getElementById(id);
+  const open = el.classList.contains('open');
   closeAllDD();
-  if (!was) el.classList.add('open');
+  if (!open) { el.classList.add('open'); openDDId = id; }
 }
-function closeAllDD() { document.querySelectorAll('.card-dropdown.open').forEach(d => d.classList.remove('open')); }
+function closeAllDD() {
+  document.querySelectorAll('.card-dropdown.open').forEach(d => d.classList.remove('open'));
+  openDDId = null;
+}
 document.addEventListener('click', closeAllDD);
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeAllDD(); });
 
 // ── Reposicion ────────────────────────────────────────────
 function renderReposicion() {
-  const body = document.getElementById('repo-body');
-  const items = skuConfig.filter(s => s.en_tienda);
-  if (!items.length) { body.innerHTML='<tr><td colspan="7" class="empty">No hay SKUs en tienda configurados.</td></tr>'; return; }
-  body.innerHTML = items.map(s => {
-    const stock  = stockMap[s.sku] || 0;
-    const mins   = MINIMOS[s.tipo_expositor] || {};
-    const noSize = ['Bidones','Otros'].includes(s.tipo_expositor);
-    const min    = noSize ? (mins['XS']||0) : (mins[String(s.size).toUpperCase()]||0);
-    const aPedir = Math.max(0, min - stock);
-    return `<tr>
-      <td>${s.product_name}</td>
-      <td style="text-align:center">${s.size||'—'}</td>
-      <td style="font-family:monospace;font-size:12px;color:var(--muted)">${s.sku}</td>
-      <td>${s.ubicacion||'—'}</td>
-      <td style="text-align:center">${stock}</td>
-      <td style="text-align:center">${min}</td>
-      <td style="text-align:center"><input class="qty-input" type="number" min="0" value="${aPedir}" data-sku="${s.sku}"/></td>
-    </tr>`;
-  }).join('');
+  const body  = document.getElementById('repo-body');
+  const items = skuConfig
+    .filter(s => s.en_tienda)
+    .map(s => {
+      const stock  = stockMap[s.sku] || 0;
+      const aPedir = Math.max(0, s.stock_minimo - stock);
+      return { ...s, stock, aPedir };
+    })
+    .filter(s => s.aPedir > 0); // solo los que hay que pedir
+
+  if (!items.length) {
+    body.innerHTML = '<tr><td colspan="7" class="empty">Todo el stock esta al dia. No hay nada que pedir.</td></tr>';
+    return;
+  }
+  body.innerHTML = items.map(s => `<tr>
+    <td>${s.product_name}</td>
+    <td style="text-align:center">${s.size||'—'}</td>
+    <td style="font-family:monospace;font-size:12px;color:var(--muted)">${s.sku}</td>
+    <td>${s.ubicacion||'—'}</td>
+    <td style="text-align:center">${s.stock}</td>
+    <td style="text-align:center">${s.stock_minimo}</td>
+    <td style="text-align:center"><input class="qty-input" type="number" min="0" value="${s.aPedir}" data-sku="${s.sku}"/></td>
+  </tr>`).join('');
 }
 
 function downloadCSV() {
@@ -530,8 +523,7 @@ function downloadCSV() {
   if (rows.length <= 1) { alert('No hay productos con cantidad > 0.'); return; }
   const blob = new Blob([rows.map(r=>r.join(',')).join('\n')], {type:'text/csv'});
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'reposicion_bigblue_' + new Date().toISOString().substring(0,10) + '.csv';
+  a.href = URL.createObjectURL(blob); a.download = 'reposicion_bigblue_' + new Date().toISOString().substring(0,10) + '.csv';
   a.click();
 }
 
