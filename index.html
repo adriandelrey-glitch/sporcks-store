@@ -203,14 +203,12 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 
 <script>
 const LS_KEY  = 'sporcks_script_url';
-const LS_UBIC = 'sporcks_ubic_v5';
 const LS_ENT  = 'sporcks_ent_v3';
 let SCRIPT_URL  = localStorage.getItem(LS_KEY) || '';
 let stockMap    = {};
 let skuConfig   = [];
 let topData     = { historico:[], mes:[] };
 let activeTop   = 'historico';
-let ubicaciones = JSON.parse(localStorage.getItem(LS_UBIC) || '{}');
 let enTiendaLocal = JSON.parse(localStorage.getItem(LS_ENT) || '{}');
 let draggedModel  = null;
 let openDDId      = null;
@@ -343,7 +341,11 @@ function isEnTienda(nombre) {
   if (enTiendaLocal[nombre] !== undefined) return enTiendaLocal[nombre];
   return skuConfig.filter(s => s.product_name === nombre).some(s => s.en_tienda);
 }
-function getUbic(nombre) { return ubicaciones[nombre] || null; }
+// Ubicacion fisica — lee de skuConfig (Sheets), agrupa por modelo
+function getUbic(nombre) {
+  const sku = skuConfig.find(s => s.product_name === nombre);
+  return sku ? (sku.ubicacion_fisica || null) : null;
+}
 
 function stockClass(stock, min) {
   if (stock <= 0)          return 's-sin';
@@ -430,9 +432,16 @@ function setEnTienda(nombre, val) {
   });
 }
 function setUbic(nombre, ubic) {
-  if (ubic) { ubicaciones[nombre] = ubic; setEnTienda(nombre, true); }
-  else      { delete ubicaciones[nombre]; setEnTienda(nombre, false); }
-  localStorage.setItem(LS_UBIC, JSON.stringify(ubicaciones));
+  // Actualizar cache local para respuesta inmediata
+  skuConfig.filter(s => s.product_name === nombre).forEach(s => {
+    s.ubicacion_fisica = ubic || '';
+  });
+  // Persistir en Sheets via POST para cada SKU del modelo
+  skuConfig.filter(s => s.product_name === nombre).forEach(s => {
+    apiPost({ action: 'setUbicacion', sku: s.sku, ubicacion: ubic || '' });
+  });
+  // Si asigna ubicacion -> marcar en_tienda true; si quita -> false
+  setEnTienda(nombre, !!ubic);
 }
 function assignModel(safeKey, ubic) {
   const nombre = decodeURIComponent(safeKey);
