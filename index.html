@@ -5,20 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SPORCKS · Dashboard</title>
 <style>
-:root {
-  --bg:#f5f5f4; --surface:#fff; --border:rgba(0,0,0,0.09);
-  --text:#1c1c1c; --muted:#6b7280; --accent:#2563eb;
-  --success-bg:#dcfce7; --success:#166534;
-  --warn-bg:#fef9c3;    --warn:#854d0e;
-  --danger-bg:#fee2e2;  --danger:#991b1b;
-  --info-bg:#dbeafe;    --info:#1e40af;
-  --radius:12px; --radius-sm:8px;
-}
-@media(prefers-color-scheme:dark){
-  :root{--bg:#111;--surface:#1c1c1e;--border:rgba(255,255,255,0.09);--text:#f5f5f5;--muted:#9ca3af;
-    --success-bg:#14532d;--success:#86efac;--warn-bg:#422006;--warn:#fde68a;
-    --danger-bg:#450a0a;--danger:#fca5a5;--info-bg:#1e3a5f;--info:#93c5fd;}
-}
+:root{--bg:#f5f5f4;--surface:#fff;--border:rgba(0,0,0,0.09);--text:#1c1c1c;--muted:#6b7280;--accent:#2563eb;
+  --success-bg:#dcfce7;--success:#166534;--warn-bg:#fef9c3;--warn:#854d0e;
+  --danger-bg:#fee2e2;--danger:#991b1b;--info-bg:#dbeafe;--info:#1e40af;
+  --radius:12px;--radius-sm:8px;}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#111;--surface:#1c1c1e;--border:rgba(255,255,255,0.09);--text:#f5f5f5;--muted:#9ca3af;
+  --success-bg:#14532d;--success:#86efac;--warn-bg:#422006;--warn:#fde68a;
+  --danger-bg:#450a0a;--danger:#fca5a5;--info-bg:#1e3a5f;--info:#93c5fd;}}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;}
 .app{max-width:1300px;margin:0 auto;padding:20px;}
@@ -37,26 +31,26 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .setup-row input{flex:1;min-width:260px;padding:7px 10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;}
 .setup-row button{padding:7px 14px;border-radius:var(--radius-sm);background:var(--info);color:#fff;border:none;cursor:pointer;font-size:13px;}
 
-/* MAIN TABS */
 .main-tabs{display:flex;gap:0;border-bottom:1.5px solid var(--border);margin-bottom:20px;}
 .main-tab{background:none;border:none;border-bottom:2.5px solid transparent;padding:10px 20px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;margin-bottom:-1.5px;}
 .main-tab.active{color:var(--text);border-bottom-color:var(--accent);}
 .tab-panel{display:none;}.tab-panel.active{display:block;}
 
-/* PANEL */
 .panel{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:16px 18px;margin-bottom:14px;}
 .panel-title{font-size:12px;font-weight:500;color:var(--muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em;}
 
-/* METRICS */
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px;}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px;}
 .metric{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px 16px;}
 .metric-label{font-size:12px;color:var(--muted);margin-bottom:5px;}
-.metric-value{font-size:24px;font-weight:600;}
+.metric-value{font-size:26px;font-weight:600;}
 .metric-sub{font-size:12px;color:var(--muted);margin-top:3px;}
 .metric.danger .metric-value{color:#dc2626;}
 .metric.warn .metric-value{color:#d97706;}
 
-/* TOP SKU TABLE */
+/* TOP TABLE */
+.sub-tabs{display:flex;gap:8px;margin-bottom:14px;}
+.sub-tab{padding:5px 14px;border-radius:99px;border:1.5px solid var(--border);background:none;font-size:13px;color:var(--muted);cursor:pointer;}
+.sub-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 .top-table{width:100%;border-collapse:collapse;font-size:13px;}
 .top-table th{font-size:11px;font-weight:500;color:var(--muted);text-align:left;padding:0 8px 8px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border);}
 .top-table td{padding:8px;border-bottom:.5px solid var(--border);vertical-align:middle;}
@@ -72,36 +66,39 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .badge-critico{background:var(--danger-bg);color:var(--danger);}
 .badge-sinstock{background:#1c1c1c;color:#f5f5f5;}
 
-/* ORG TABS */
-.org-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px;flex-wrap:wrap;overflow-x:auto;}
+/* ORG */
+.org-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px;flex-wrap:wrap;}
 .org-tab{background:none;border:none;border-bottom:2px solid transparent;padding:7px 14px;font-size:13px;color:var(--muted);cursor:pointer;margin-bottom:-1px;white-space:nowrap;}
 .org-tab.active{color:var(--text);border-bottom-color:var(--accent);}
 .org-panel{display:none;}.org-panel.active{display:block;}
 
-/* MODELO CARDS */
-.section-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-.models-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
-.model-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:99px;padding:5px 12px 5px 5px;cursor:grab;user-select:none;transition:box-shadow .15s;position:relative;}
-.model-pill:active{cursor:grabbing;box-shadow:0 4px 16px rgba(0,0,0,0.15);}
-.model-pill.dragging{opacity:.4;}
-.model-pill.in-tienda{border-color:var(--accent);}
-.model-pill img{width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--bg);flex-shrink:0;}
-.model-pill .pill-name{font-size:12px;font-weight:500;max-width:140px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-.model-pill .pill-loc{font-size:10px;color:var(--muted);}
-.pill-menu-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px;line-height:1;}
-.pill-menu-btn:hover{color:var(--text);}
+.section-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.section-label:first-child{margin-top:0;}
+.models-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
 
-/* DROPDOWN MENU */
-.pill-menu{position:absolute;top:100%;right:0;margin-top:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:100;min-width:160px;display:none;}
-.pill-menu.open{display:block;}
-.pill-menu button{display:block;width:100%;text-align:left;padding:8px 14px;background:none;border:none;font-size:13px;color:var(--text);cursor:pointer;}
-.pill-menu button:hover{background:var(--bg);}
-.pill-menu-sep{height:1px;background:var(--border);margin:4px 0;}
+/* PILLS */
+.model-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:99px;padding:4px 10px 4px 4px;cursor:grab;user-select:none;transition:box-shadow .15s,border-color .15s;position:relative;}
+.model-pill:active{cursor:grabbing;}
+.model-pill.dragging{opacity:.35;box-shadow:0 4px 16px rgba(0,0,0,0.15);}
+.model-pill.in-tienda{border-color:rgba(37,99,235,0.4);}
+.model-pill img{width:30px;height:30px;border-radius:50%;object-fit:cover;background:var(--bg);flex-shrink:0;}
+.pill-img-placeholder{width:30px;height:30px;border-radius:50%;background:var(--bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.pill-text{}
+.pill-name{font-size:12px;font-weight:500;max-width:150px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;}
+.pill-loc{font-size:10px;color:var(--muted);display:block;}
+.pill-menu-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0 2px;line-height:1;flex-shrink:0;}
+.pill-menu-btn:hover{color:var(--text);}
+.pill-dropdown{position:absolute;top:calc(100% + 4px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:0 4px 20px rgba(0,0,0,0.12);z-index:200;min-width:170px;display:none;overflow:hidden;}
+.pill-dropdown.open{display:block;}
+.pill-dropdown button{display:block;width:100%;text-align:left;padding:8px 14px;background:none;border:none;font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap;}
+.pill-dropdown button:hover{background:var(--bg);}
+.pill-dropdown button.active-loc{color:var(--accent);font-weight:500;}
+.dd-sep{height:1px;background:var(--border);margin:3px 0;}
 
 /* DROP ZONES */
-.drop-zone{min-height:80px;border:2px dashed var(--border);border-radius:var(--radius);padding:10px;transition:border-color .15s,background .15s;}
+.drop-zone{min-height:70px;border:2px dashed var(--border);border-radius:var(--radius);padding:10px;transition:border-color .15s,background .15s;}
 .drop-zone.drag-over{border-color:var(--accent);background:var(--info-bg);}
-.drop-zone-hint{font-size:12px;color:var(--muted);text-align:center;padding:16px 0;}
+.drop-hint{font-size:12px;color:var(--muted);text-align:center;padding:14px 0;}
 
 /* REPO */
 .repo-table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -140,16 +137,22 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
   <button class="main-tab" onclick="switchTab('reposicion',this)">Reposicion BigBlue</button>
 </div>
 
-<!-- ══════════════ TAB RESUMEN ══════════════ -->
+<!-- ══════════════ RESUMEN ══════════════ -->
 <div id="tab-resumen" class="tab-panel active">
   <div class="metrics" id="metrics"><div class="loading">Cargando…</div></div>
   <div class="panel">
-    <div class="panel-title">Top 20 SKU mas vendidos (historico)</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+      <div class="panel-title" style="margin:0">Top 20 SKU</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="switchTop('historico',this)">Historico</button>
+        <button class="sub-tab" onclick="switchTop('mes',this)">Ultimos 30 dias</button>
+      </div>
+    </div>
     <div style="overflow-x:auto"><div id="top-list"><div class="loading">Cargando…</div></div></div>
   </div>
 </div>
 
-<!-- ══════════════ TAB ORGANIZACION ══════════════ -->
+<!-- ══════════════ ORGANIZACION ══════════════ -->
 <div id="tab-organizacion" class="tab-panel">
   <div class="org-tabs">
     <button class="org-tab active" onclick="switchOrg('modelos',this)">Modelos</button>
@@ -161,27 +164,26 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
     <button class="org-tab" onclick="switchOrg('Mostrador 2',this)">Mostrador 2</button>
     <button class="org-tab" onclick="switchOrg('Almacen',this)">Almacen</button>
   </div>
-
   <div id="org-modelos" class="org-panel active">
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Arrastra cada modelo a su ubicacion o usa el menu ⋯ para reasignarlo.</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Arrastra modelos a su ubicacion o usa ⋯ para reasignar. Al asignar una ubicacion el producto se marca como <em>en tienda</em> automaticamente.</p>
     <div id="modelos-content"><div class="loading">Cargando…</div></div>
   </div>
-  <div id="org-Pared 1"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 1')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Pared 1" style="margin-top:10px"></div></div>
-  <div id="org-Pared 2"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 2')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Pared 2" style="margin-top:10px"></div></div>
-  <div id="org-Pared 3"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 3')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Pared 3" style="margin-top:10px"></div></div>
-  <div id="org-Pared 4"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 4')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Pared 4" style="margin-top:10px"></div></div>
-  <div id="org-Mostrador 1" class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 1')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Mostrador 1" style="margin-top:10px"></div></div>
-  <div id="org-Mostrador 2" class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 2')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Mostrador 2" style="margin-top:10px"></div></div>
-  <div id="org-Almacen"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Almacen')"><div class="drop-zone-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="items-Almacen" style="margin-top:10px"></div></div>
+  <div id="org-Pared 1"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 1')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Pared 1" style="margin-top:10px"></div></div>
+  <div id="org-Pared 2"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 2')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Pared 2" style="margin-top:10px"></div></div>
+  <div id="org-Pared 3"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 3')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Pared 3" style="margin-top:10px"></div></div>
+  <div id="org-Pared 4"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Pared 4')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Pared 4" style="margin-top:10px"></div></div>
+  <div id="org-Mostrador 1" class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 1')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Mostrador 1" style="margin-top:10px"></div></div>
+  <div id="org-Mostrador 2" class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Mostrador 2')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Mostrador 2" style="margin-top:10px"></div></div>
+  <div id="org-Almacen"     class="org-panel"><div class="drop-zone" ondragover="onDragOver(event)" ondrop="onDrop(event,'Almacen')"><div class="drop-hint">Arrastra modelos aqui</div></div><div class="models-grid" id="dz-items-Almacen" style="margin-top:10px"></div></div>
 </div>
 
-<!-- ══════════════ TAB REPOSICION ══════════════ -->
+<!-- ══════════════ REPOSICION ══════════════ -->
 <div id="tab-reposicion" class="tab-panel">
   <div class="panel">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
       <div>
         <div class="panel-title" style="margin-bottom:4px;">Reposicion BigBlue</div>
-        <p style="font-size:12px;color:var(--muted)">Stock actual vs minimo por SKU. Ajusta cantidades y descarga el CSV.</p>
+        <p style="font-size:12px;color:var(--muted)">Solo SKUs marcados como en tienda. Ajusta cantidades y descarga el CSV.</p>
       </div>
       <div style="display:flex;gap:8px;">
         <button class="btn btn-secondary" onclick="renderReposicion()">↻ Recalcular</button>
@@ -190,12 +192,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
     </div>
     <div style="overflow-x:auto">
       <table class="repo-table">
-        <thead><tr>
-          <th>Producto</th><th>Talla</th><th>SKU</th><th>Ubicacion</th>
-          <th style="text-align:center">Stock actual</th>
-          <th style="text-align:center">Minimo</th>
-          <th style="text-align:center">A pedir</th>
-        </tr></thead>
+        <thead><tr><th>Producto</th><th>Talla</th><th>SKU</th><th>Ubicacion</th><th style="text-align:center">Stock</th><th style="text-align:center">Minimo</th><th style="text-align:center">A pedir</th></tr></thead>
         <tbody id="repo-body"><tr><td colspan="7" class="loading">Cargando…</td></tr></tbody>
       </table>
     </div>
@@ -204,15 +201,17 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 
 </div>
 <script>
-// ── Config ────────────────────────────────────────────────
-const LS_KEY  = 'shopify_script_url';
-const LS_UBIC = 'shopify_ubicaciones_v2';
-let SCRIPT_URL = localStorage.getItem(LS_KEY) || '';
-let stockData  = [];
-let topData    = [];
-let ubicaciones = JSON.parse(localStorage.getItem(LS_UBIC) || '{}');
+const LS_KEY  = 'sporcks_script_url';
+const LS_UBIC = 'sporcks_ubicaciones_v3';
+const LS_ENT  = 'sporcks_en_tienda_override'; // cache local de cambios pendientes
+let SCRIPT_URL  = localStorage.getItem(LS_KEY) || '';
+let stockData   = [];
+let topHistorico = [];
+let topMes       = [];
+let ubicaciones  = JSON.parse(localStorage.getItem(LS_UBIC) || '{}');
+let enTiendaOverride = JSON.parse(localStorage.getItem(LS_ENT) || '{}');
 let draggedModel = null;
-let openMenu = null;
+let activeTopTab = 'historico';
 
 const UBICACIONES = ['Pared 1','Pared 2','Pared 3','Pared 4','Mostrador 1','Mostrador 2','Almacen'];
 
@@ -220,8 +219,7 @@ const UBICACIONES = ['Pared 1','Pared 2','Pared 3','Pared 4','Mostrador 1','Most
 function saveScriptUrl() {
   const v = document.getElementById('script-url-input').value.trim();
   if (!v) return;
-  localStorage.setItem(LS_KEY, v);
-  SCRIPT_URL = v;
+  localStorage.setItem(LS_KEY, v); SCRIPT_URL = v;
   document.getElementById('setup-banner').classList.remove('show');
   loadAll();
 }
@@ -236,6 +234,15 @@ async function apiFetch(action) {
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }
+async function apiPost(body) {
+  const r = await fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
 
 // ── Load ──────────────────────────────────────────────────
 async function loadAll() {
@@ -246,10 +253,11 @@ async function loadAll() {
     const [summary, top, stock] = await Promise.all([
       apiFetch('summary'), apiFetch('top'), apiFetch('stock')
     ]);
-    stockData = stock;
-    topData   = top;
+    stockData    = stock;
+    topHistorico = top.historico || [];
+    topMes       = top.mes || [];
     renderMetrics(summary);
-    renderTop(top);
+    renderTop();
     renderOrganizacion();
     renderReposicion();
     document.getElementById('last-sync').textContent = 'Ultima sync: ' + (summary.ultima_sync || '—');
@@ -259,7 +267,7 @@ async function loadAll() {
   btn.disabled = false; btn.textContent = '↻ Actualizar';
 }
 
-// ── Tab switching ─────────────────────────────────────────
+// ── Tabs ──────────────────────────────────────────────────
 function switchTab(id, btn) {
   document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -272,11 +280,15 @@ function switchOrg(id, btn) {
   btn.classList.add('active');
   document.getElementById('org-' + id).classList.add('active');
 }
+function switchTop(tab, btn) {
+  activeTopTab = tab;
+  document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTop();
+}
 
 // ── Metrics ───────────────────────────────────────────────
 function renderMetrics(s) {
-  const fmt = v => '€' + Number(v).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const total_alertas = s.stock_sin_stock + s.stock_critico + s.stock_bajo;
   document.getElementById('metrics').innerHTML = `
     <div class="metric ${s.stock_sin_stock+s.stock_critico>0?'danger':''}">
       <div class="metric-label">Sin stock / Critico</div>
@@ -290,111 +302,132 @@ function renderMetrics(s) {
     </div>
     <div class="metric">
       <div class="metric-label">Total alertas</div>
-      <div class="metric-value">${total_alertas}</div>
-      <div class="metric-sub">SKUs a revisar</div>
+      <div class="metric-value">${s.stock_sin_stock + s.stock_critico + s.stock_bajo}</div>
+      <div class="metric-sub">SKUs en tienda a revisar</div>
     </div>`;
 }
 
-// ── Top 20 SKUs ───────────────────────────────────────────
-function renderTop(data) {
-  const el = document.getElementById('top-list');
+// ── Top 20 ────────────────────────────────────────────────
+function renderTop() {
+  const el   = document.getElementById('top-list');
+  const data = activeTopTab === 'historico' ? topHistorico : topMes;
   if (!data.length) { el.innerHTML = '<div class="empty">Sin datos.</div>'; return; }
-  const top20 = data.slice(0, 20);
-  const max = top20[0].unidades;
-  el.innerHTML = '<table class="top-table"><thead><tr><th>#</th><th>Producto / SKU</th><th>Unidades vendidas</th></tr></thead><tbody>' +
-    top20.map((p, i) => `<tr>
-      <td style="color:var(--muted);width:30px">${i+1}</td>
-      <td><div style="font-weight:500">${p.nombre}</div></td>
-      <td>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(p.unidades/max*100)}%"></div></div>
-          <span style="font-weight:500">${p.unidades}</span>
-        </div>
-      </td>
+  const max = data[0].unidades;
+  el.innerHTML = '<table class="top-table"><thead><tr><th>#</th><th>Modelo</th><th>SKU</th><th>Unidades</th></tr></thead><tbody>' +
+    data.map((p, i) => `<tr>
+      <td style="color:var(--muted);width:28px">${i+1}</td>
+      <td style="font-weight:500">${p.modelo}</td>
+      <td style="font-family:monospace;font-size:12px;color:var(--muted)">${p.sku}</td>
+      <td><div style="display:flex;align-items:center;gap:10px">
+        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(p.unidades/max*100)}%"></div></div>
+        <span style="font-weight:500">${p.unidades}</span>
+      </div></td>
     </tr>`).join('') + '</tbody></table>';
 }
 
 // ── Organizacion ──────────────────────────────────────────
-// Agrupa SKUs por nombre de producto
-function groupModels(data) {
-  const map = {};
-  data.forEach(s => {
-    const key = s.producto;
-    if (!map[key]) map[key] = { nombre: key, imagen: s.imagen || '', en_tienda: s.en_tienda === 'SI', skus: [] };
-    map[key].skus.push(s);
-    if (s.imagen) map[key].imagen = s.imagen;
-    if (s.en_tienda === 'SI') map[key].en_tienda = true;
-  });
-  return Object.values(map).sort((a, b) => {
-    if (a.en_tienda !== b.en_tienda) return a.en_tienda ? -1 : 1;
-    return a.nombre.localeCompare(b.nombre);
+function isEnTienda(producto) {
+  if (enTiendaOverride[producto] !== undefined) return enTiendaOverride[producto];
+  return stockData.filter(s => s.producto === producto).some(s => s.en_tienda === 'SI');
+}
+function getUbic(producto) { return ubicaciones[producto] || null; }
+
+function setEnTienda(producto, val) {
+  enTiendaOverride[producto] = val;
+  localStorage.setItem(LS_ENT, JSON.stringify(enTiendaOverride));
+  // Actualizar Sheets via POST para todos los SKUs de este modelo
+  const skus = stockData.filter(s => s.producto === producto).map(s => s.sku);
+  skus.forEach(sku => {
+    apiPost({ action: 'setEnTienda', sku: sku, en_tienda: val })
+      .catch(err => console.warn('Error actualizando en_tienda para ' + sku + ':', err));
   });
 }
 
-function getUbic(nombre) { return ubicaciones[nombre] || null; }
-function setUbic(nombre, ubic) {
-  if (ubic) ubicaciones[nombre] = ubic; else delete ubicaciones[nombre];
+function setUbic(producto, ubic) {
+  if (ubic) {
+    ubicaciones[producto] = ubic;
+    // Asignar ubicacion -> marcar como en_tienda
+    setEnTienda(producto, true);
+  } else {
+    delete ubicaciones[producto];
+    // Quitar ubicacion -> marcar como false
+    setEnTienda(producto, false);
+  }
   localStorage.setItem(LS_UBIC, JSON.stringify(ubicaciones));
 }
 
-function makePill(model, draggable) {
-  const ubic = getUbic(model.nombre);
-  const id   = 'pill-' + btoa(encodeURIComponent(model.nombre)).replace(/[^a-z0-9]/gi,'').substring(0,16);
-  const menuId = 'menu-' + id;
-  const menuItems = UBICACIONES.map(u =>
-    `<button onclick="assignModel('${encodeURIComponent(model.nombre)}','${u}')">${ubic===u?'✓ ':''} ${u}</button>`
-  ).join('') +
-  '<div class="pill-menu-sep"></div>' +
-  `<button onclick="assignModel('${encodeURIComponent(model.nombre)}',null)" style="color:var(--muted)">Quitar ubicacion</button>`;
+function groupModels() {
+  const map = {};
+  stockData.forEach(s => {
+    if (!map[s.producto]) map[s.producto] = { nombre: s.producto, imagen: '', skus: [] };
+    if (s.imagen) map[s.producto].imagen = s.imagen;
+    map[s.producto].skus.push(s);
+  });
+  return Object.values(map).sort((a, b) => {
+    const aEnt = isEnTienda(a.nombre);
+    const bEnt = isEnTienda(b.nombre);
+    if (aEnt !== bEnt) return aEnt ? -1 : 1;
+    return a.nombre.localeCompare(b.nombre, 'es');
+  });
+}
 
-  return `<div class="model-pill ${model.en_tienda?'in-tienda':''}" id="${id}"
-    draggable="${draggable}"
-    ondragstart="onDragStart(event,'${encodeURIComponent(model.nombre)}')"
+function makePill(model) {
+  const ubic    = getUbic(model.nombre);
+  const enT     = isEnTienda(model.nombre);
+  const safeKey = encodeURIComponent(model.nombre);
+  const menuId  = 'dd-' + Math.random().toString(36).slice(2,10);
+
+  const menuItems = UBICACIONES.map(u =>
+    `<button class="${ubic===u?'active-loc':''}" onclick="assignModel('${safeKey}','${u}')">${ubic===u?'✓ ':''} ${u}</button>`
+  ).join('') +
+  '<div class="dd-sep"></div>' +
+  `<button onclick="assignModel('${safeKey}',null)" style="color:var(--muted)">Quitar de ubicacion</button>`;
+
+  const imgHtml = model.imagen
+    ? `<img src="${model.imagen}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><div class="pill-img-placeholder" style="display:none">🧦</div>`
+    : `<div class="pill-img-placeholder">🧦</div>`;
+
+  return `<div class="model-pill ${enT?'in-tienda':''}"
+    draggable="true"
+    ondragstart="onDragStart(event,'${safeKey}')"
     ondragend="onDragEnd(event)">
-    <img src="${model.imagen}" onerror="this.style.display='none'" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--bg)">
-    <div>
-      <div class="pill-name" title="${model.nombre}">${model.nombre}</div>
-      ${ubic ? `<div class="pill-loc">📍 ${ubic}</div>` : ''}
+    ${imgHtml}
+    <div class="pill-text">
+      <span class="pill-name" title="${model.nombre}">${model.nombre}</span>
+      ${ubic ? `<span class="pill-loc">📍 ${ubic}</span>` : ''}
     </div>
-    <button class="pill-menu-btn" onclick="toggleMenu(event,'${menuId}')">⋯</button>
-    <div class="pill-menu" id="${menuId}">${menuItems}</div>
+    <button class="pill-menu-btn" onclick="toggleDD(event,'${menuId}')">⋯</button>
+    <div class="pill-dropdown" id="${menuId}">${menuItems}</div>
   </div>`;
 }
 
 function renderOrganizacion() {
-  const models = groupModels(stockData);
-
-  // Pestaña Modelos
-  const enTienda = models.filter(m => m.en_tienda);
-  const sinTienda = models.filter(m => !m.en_tienda);
+  const models  = groupModels();
+  const enT     = models.filter(m => isEnTienda(m.nombre));
+  const noEnT   = models.filter(m => !isEnTienda(m.nombre));
   let html = '';
-  if (enTienda.length) {
-    html += '<div class="section-label">En tienda</div><div class="models-grid">' + enTienda.map(m => makePill(m, true)).join('') + '</div>';
-  }
-  if (sinTienda.length) {
-    html += '<div class="section-label">Sin configurar</div><div class="models-grid">' + sinTienda.map(m => makePill(m, true)).join('') + '</div>';
-  }
+  if (enT.length)  html += '<div class="section-label">En tienda (' + enT.length + ')</div><div class="models-grid">' + enT.map(makePill).join('') + '</div>';
+  if (noEnT.length) html += '<div class="section-label">Sin configurar (' + noEnT.length + ')</div><div class="models-grid">' + noEnT.map(makePill).join('') + '</div>';
   document.getElementById('modelos-content').innerHTML = html || '<div class="empty">Sin datos.</div>';
 
-  // Pestañas por ubicacion
   UBICACIONES.forEach(ubic => {
-    const el = document.getElementById('items-' + ubic);
+    const el = document.getElementById('dz-items-' + ubic);
     if (!el) return;
     const items = models.filter(m => getUbic(m.nombre) === ubic);
-    el.innerHTML = items.length ? items.map(m => makePill(m, true)).join('') : '';
+    el.innerHTML = items.map(makePill).join('');
   });
 }
 
-function assignModel(encodedNombre, ubic) {
-  const nombre = decodeURIComponent(encodedNombre);
-  setUbic(nombre, ubic);
-  closeAllMenus();
+function assignModel(safeKey, ubic) {
+  const nombre = decodeURIComponent(safeKey);
+  setUbic(nombre, ubic || null);
+  closeAllDD();
   renderOrganizacion();
 }
 
 // ── Drag & Drop ───────────────────────────────────────────
-function onDragStart(e, encodedNombre) {
-  draggedModel = decodeURIComponent(encodedNombre);
+function onDragStart(e, safeKey) {
+  draggedModel = decodeURIComponent(safeKey);
   e.dataTransfer.effectAllowed = 'move';
   setTimeout(() => e.target.classList.add('dragging'), 0);
 }
@@ -402,45 +435,41 @@ function onDragEnd(e) {
   e.target.classList.remove('dragging');
   document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
 }
-function onDragOver(e) {
-  e.preventDefault();
-  e.currentTarget.classList.add('drag-over');
-}
-function onDrop(e, ubicacion) {
+function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+function onDrop(e, ubic) {
   e.preventDefault();
   e.currentTarget.classList.remove('drag-over');
   if (!draggedModel) return;
-  setUbic(draggedModel, ubicacion);
+  setUbic(draggedModel, ubic);
   draggedModel = null;
   renderOrganizacion();
 }
 
-// ── Dropdown menu ─────────────────────────────────────────
-function toggleMenu(e, menuId) {
+// ── Dropdown ──────────────────────────────────────────────
+function toggleDD(e, id) {
   e.stopPropagation();
-  const menu = document.getElementById(menuId);
-  const isOpen = menu.classList.contains('open');
-  closeAllMenus();
-  if (!isOpen) { menu.classList.add('open'); openMenu = menuId; }
+  const el = document.getElementById(id);
+  const wasOpen = el.classList.contains('open');
+  closeAllDD();
+  if (!wasOpen) el.classList.add('open');
 }
-function closeAllMenus() {
-  document.querySelectorAll('.pill-menu.open').forEach(m => m.classList.remove('open'));
-  openMenu = null;
+function closeAllDD() {
+  document.querySelectorAll('.pill-dropdown.open').forEach(d => d.classList.remove('open'));
 }
-document.addEventListener('click', closeAllMenus);
+document.addEventListener('click', closeAllDD);
 
 // ── Reposicion ────────────────────────────────────────────
 function renderReposicion() {
-  const body = document.getElementById('repo-body');
+  const body  = document.getElementById('repo-body');
   const items = stockData.filter(s => s.en_tienda === 'SI');
-  if (!items.length) { body.innerHTML = '<tr><td colspan="7" class="empty">No hay SKUs configurados en tienda.</td></tr>'; return; }
+  if (!items.length) { body.innerHTML = '<tr><td colspan="7" class="empty">No hay SKUs en tienda configurados.</td></tr>'; return; }
   body.innerHTML = items.map(s => {
     const aPedir = Math.max(0, s.stock_minimo - s.stock_actual);
     return `<tr>
       <td>${s.producto}</td>
-      <td style="text-align:center">${s.variante !== '-' ? s.variante : '—'}</td>
+      <td style="text-align:center">${s.variante!=='-'?s.variante:'—'}</td>
       <td style="font-family:monospace;font-size:12px;color:var(--muted)">${s.sku}</td>
-      <td>${s.ubicacion !== '-' ? s.ubicacion : '—'}</td>
+      <td>${s.ubicacion!=='-'?s.ubicacion:'—'}</td>
       <td style="text-align:center">${s.stock_actual}</td>
       <td style="text-align:center">${s.stock_minimo}</td>
       <td style="text-align:center"><input class="qty-input" type="number" min="0" value="${aPedir}" data-sku="${s.sku}"/></td>
@@ -450,22 +479,18 @@ function renderReposicion() {
 
 function downloadCSV() {
   const rows = [['ProductSKU','Quantity','UnitPrice','UnitTax','TotalDiscount']];
-  document.querySelectorAll('#repo-body .qty-input').forEach(input => {
-    const qty = parseInt(input.value || '0');
-    if (qty > 0) rows.push([input.dataset.sku, qty, '', '', '']);
+  document.querySelectorAll('#repo-body .qty-input').forEach(inp => {
+    const qty = parseInt(inp.value || '0');
+    if (qty > 0) rows.push([inp.dataset.sku, qty, '', '', '']);
   });
   if (rows.length <= 1) { alert('No hay productos con cantidad > 0.'); return; }
-  const csv  = rows.map(r => r.join(',')).join('\n');
-  const blob = new Blob([csv], {type:'text/csv'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url;
+  const blob = new Blob([rows.map(r=>r.join(',')).join('\n')], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
   a.download = 'reposicion_bigblue_' + new Date().toISOString().substring(0,10) + '.csv';
   a.click();
-  URL.revokeObjectURL(url);
 }
 
-// ── Init ──────────────────────────────────────────────────
 loadAll();
 </script>
 </body>
